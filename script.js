@@ -40,13 +40,16 @@ function noDecimal() {
 function calculate() {
 	switch (operation) {
 		case 'add':
-			return toString(Number(calculatedNum) + Number(displayNum));
+			return (Number(calculatedNum) + Number(displayNum)).toString();
 		case 'subtract':
-			return toString(Number(calculatedNum) - Number(displayNum));
+			return (Number(calculatedNum) - Number(displayNum)).toString();
 		case 'multiply':
-			return toString(Number(calculatedNum) * Number(displayNum));
+			return (Number(calculatedNum) * Number(displayNum)).toString();
 		case 'divide':
-			return toString(Number(calculatedNum) / Number(displayNum));
+			if (displayNum === '0') {
+				return 'ERROR';
+			}
+			return (Number(calculatedNum) / Number(displayNum)).toString();
 		default:
 			return;				
 	}
@@ -90,8 +93,7 @@ document.getElementById('divide').addEventListener('click', function(e) {
 	if (operation === null) {
 		calculatedNum = displayNum;
 	} else {
-		calculatedNum = calculate();	
-		//need to account for divide by zero		
+		calculatedNum = calculate();		
 	}
 	displayNum = '0';
 	display(calculatedNum);
@@ -102,12 +104,13 @@ document.getElementById('equals').addEventListener('click', function(e) {
 	if (operation === null) {
 		calculatedNum = displayNum;
 	} else {
-		calculatedNum = calculate();	
-		//need to account for divide by zero		
+		calculatedNum = calculate();			
 	}
-	displayNum = '0';
+	displayNum = calculatedNum;
 	display(calculatedNum);
 	operation = null;
+	calculatedNum = null;
+	displayNum = '0';
 });
 
 //Number Keys
