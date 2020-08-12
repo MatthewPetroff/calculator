@@ -5,19 +5,19 @@ let operationClicked = false;
 let displayNum = '0';
 
 function display(string) {
-	const tooLarge = (Number(string) > 999999999.9);
-	const tooLong = (string.length > 11);
+	const tooLarge = (Number(string) > 999999999999.9);
+	const tooLong = (string.length > 14);
 	if (tooLarge) {
 		document.getElementById('display').textContent = 'TOO LARGE';
 	} else if (tooLong) {
-		document.getElementById('display').textContent = string.slice(0, 12);	
+		document.getElementById('display').textContent = string.slice(0, 15);	
 	} else {
 		document.getElementById('display').textContent = string;	
 	}
 }
 
 function updateDisplayNum(char) {
-	const displayNotFull = (displayNum.length < 11);
+	const displayNotFull = (displayNum.length < 14);
 	if (displayNotFull) {
 		if (displayNum === '0') {
 			if (char === '.') {
