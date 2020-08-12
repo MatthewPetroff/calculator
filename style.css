@@ -1,0 +1,55 @@
+body {
+	margin: 0;
+	font-family: arial;
+	background-color: #C5CDBF;
+}
+
+button {
+	width: 92px;
+	height: 100%;
+	color: white;
+	font-size: 30px;
+	font-weight: bold;	
+}
+
+output {
+	display: flex;
+}
+
+.calculator {
+	width: 400px;
+	height: 650px;
+	margin: auto;
+	padding: 5px;
+	background-color: grey; 
+}
+
+.display {
+	width: 392px;
+	height: 100px;
+	margin: 4px;
+	background-color: #E9D9D1;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.row {
+	width: 392px;
+	height: 100px;
+	margin: 8px 4px;
+	background-color: none;
+	display: flex;
+	justify-content: space-between;
+}
+
+.number {
+	background-color: #566585;
+}
+
+.operation {
+	background-color: #132237;
+}
+
+.regular {
+	background-color: #1B1C25;	
+}
