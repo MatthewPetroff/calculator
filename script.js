@@ -1,24 +1,33 @@
+let calculatedNum = null;
+let memory = null;
 let operation = null;
 let operationClicked = false;
-let memory = null;
-let calculatedNum = null;
 let displayNum = '0';
 
-
 function display(string) {
-	document.getElementById('display').textContent = string;
+	if (Number(string) > 999999999.9) {
+		document.getElementById('display').textContent = 'TOO LARGE';
+	} else if (string.length > 11) {
+		document.getElementById('display').textContent = string.slice(0, 12);	
+	} else {
+		document.getElementById('display').textContent = string;	
+	}
 }
 
 function updateDisplayNum(char) {
-	if (displayNum === '0') {
-		if (char === '.') {
-			displayNum = '0.';
+	if (displayNum.length < 11) {
+		if (displayNum === '0') {
+			if (char === '.') {
+				displayNum = '0.';
+			} else {
+				displayNum = char;	
+			}
 		} else {
-			displayNum = char;	
+			displayNum += char;
 		}
-	} else {
-		displayNum += char;
 	}
+	display(displayNum);
+	operationClicked = false;
 }
 
 function notZero() {
@@ -52,75 +61,43 @@ function calculate() {
 			}
 			return (Number(calculatedNum) / Number(displayNum)).toString();
 		default:
-			return;				
+			return displayNum;				
 	}
+}
+
+function clickOperation(type) {
+	if (operationClicked) {
+		return;
+	};
+	calculatedNum = calculate();	
+	displayNum = '0';
+	display(calculatedNum);
+	operation = type;
+	operationClicked = true;
 }
 
 //Operation Keys
 document.getElementById('add').addEventListener('click', function(e) {
-	if (operationClicked) {return};
-
-	if (calculatedNum === null) {
-		calculatedNum = displayNum;
-	} else {
-		calculatedNum = calculate();	
-	}
-	displayNum = '0';
-	display(calculatedNum);
-	operation = 'add';
-	operationClicked = true;
+	clickOperation('add');
 });
 
 document.getElementById('subtract').addEventListener('click', function(e) {
-	if (operationClicked) {return};
-
-	if (calculatedNum === null) {
-		calculatedNum = displayNum;
-	} else {
-		calculatedNum = calculate();	
-	}
-	displayNum = '0';
-	display(calculatedNum);
-	operation = 'subtract';
-	operationClicked = true;
+	clickOperation('subtract');
 });
 
 document.getElementById('multiply').addEventListener('click', function(e) {
-	if (operationClicked) {return};
-
-	if (calculatedNum === null) {
-		calculatedNum = displayNum;
-	} else {
-		calculatedNum = calculate();	
-	}
-	displayNum = '0';
-	display(calculatedNum);
-	operation = 'multiply';
-	operationClicked = true;
+	clickOperation('multiply');
 });
 
 document.getElementById('divide').addEventListener('click', function(e) {
-	if (operationClicked) {return};
-
-	if (calculatedNum === null) {
-		calculatedNum = displayNum;
-	} else {
-		calculatedNum = calculate();	
-	}
-	displayNum = '0';
-	display(calculatedNum);
-	operation = 'divide';
-	operationClicked = true;
+	clickOperation('divide');
 });
 
 document.getElementById('equals').addEventListener('click', function(e) {
-	if (operationClicked) {return};
-
-	if (calculatedNum === null) {
-		calculatedNum = displayNum;
-	} else {
-		calculatedNum = calculate();			
-	}
+	if (operationClicked) {
+		return;
+	};
+	calculatedNum = calculate();			
 	displayNum = calculatedNum;
 	display(calculatedNum);
 	operation = null;
@@ -130,79 +107,58 @@ document.getElementById('equals').addEventListener('click', function(e) {
 //Number Keys
 document.getElementById('zero').addEventListener('click', function(e) {
 	updateDisplayNum('0');
-	display(displayNum);
-	operationClicked = false;
 });
 
 document.getElementById('one').addEventListener('click', function(e) {
-	updateDisplayNum('1');	
-	display(displayNum);
-	operationClicked = false;	
+	updateDisplayNum('1');		
 });
 
 document.getElementById('two').addEventListener('click', function(e) {
-	updateDisplayNum('2');	
-	display(displayNum);
-	operationClicked = false;		
+	updateDisplayNum('2');			
 });
 
 document.getElementById('three').addEventListener('click', function(e) {
-	updateDisplayNum('3');
-	display(displayNum);
-	operationClicked = false;		
+	updateDisplayNum('3');	
 });
 
 document.getElementById('four').addEventListener('click', function(e) {
-	updateDisplayNum('4');	
-	display(displayNum);
-	operationClicked = false;		
+	updateDisplayNum('4');		
 });
 
 document.getElementById('five').addEventListener('click', function(e) {
-	updateDisplayNum('5');	
-	display(displayNum);
-	operationClicked = false;		
+	updateDisplayNum('5');			
 });
 
 document.getElementById('six').addEventListener('click', function(e) {
-	updateDisplayNum('6');	
-	display(displayNum);
-	operationClicked = false;		
+	updateDisplayNum('6');			
 });
 
 document.getElementById('seven').addEventListener('click', function(e) {
-	updateDisplayNum('7');
-	display(displayNum);
-	operationClicked = false;		
+	updateDisplayNum('7');		
 });
 
 document.getElementById('eight').addEventListener('click', function(e) {
-	updateDisplayNum('8');
-	display(displayNum);
-	operationClicked = false;		
+	updateDisplayNum('8');	
 });
 
 document.getElementById('nine').addEventListener('click', function(e) {
 	updateDisplayNum('9');		
-	display(displayNum);
-	operationClicked = false;	
 });
 
 document.getElementById('decimal').addEventListener('click', function(e) {
 	if (noDecimal()) {
 		updateDisplayNum('.');
-	}	
-	display(displayNum);
-	operationClicked = false;	
+	}
 });
 
 //Other Keys
 document.getElementById('clear').addEventListener('click', function(e) {
-	operation = null;
 	calculatedNum = null;
+	memory = null;
+	operation = null;	
+	operationClicked = false;
 	displayNum = '0';
 	display(displayNum);
-	operationClicked = false;
 });
 
 document.getElementById('memory-save').addEventListener('click', function(e) {
