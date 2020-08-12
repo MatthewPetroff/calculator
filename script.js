@@ -7,7 +7,6 @@ let displayNum = '0';
 function display(string) {
 	const tooLarge = (Number(string) > 999999999.9);
 	const tooLong = (string.length > 11);
-
 	if (tooLarge) {
 		document.getElementById('display').textContent = 'TOO LARGE';
 	} else if (tooLong) {
@@ -19,7 +18,6 @@ function display(string) {
 
 function updateDisplayNum(char) {
 	const displayNotFull = (displayNum.length < 11);
-	
 	if (displayNotFull) {
 		if (displayNum === '0') {
 			if (char === '.') {
