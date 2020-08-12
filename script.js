@@ -5,9 +5,12 @@ let operationClicked = false;
 let displayNum = '0';
 
 function display(string) {
-	if (Number(string) > 999999999.9) {
+	const tooLarge = (Number(string) > 999999999.9);
+	const tooLong = (string.length > 11);
+
+	if (tooLarge) {
 		document.getElementById('display').textContent = 'TOO LARGE';
-	} else if (string.length > 11) {
+	} else if (tooLong) {
 		document.getElementById('display').textContent = string.slice(0, 12);	
 	} else {
 		document.getElementById('display').textContent = string;	
@@ -15,7 +18,9 @@ function display(string) {
 }
 
 function updateDisplayNum(char) {
-	if (displayNum.length < 11) {
+	const displayNotFull = (displayNum.length < 11);
+	
+	if (displayNotFull) {
 		if (displayNum === '0') {
 			if (char === '.') {
 				displayNum = '0.';
@@ -28,14 +33,6 @@ function updateDisplayNum(char) {
 	}
 	display(displayNum);
 	operationClicked = false;
-}
-
-function notZero() {
-	if (displayNum != '0') {
-		return true;
-	} else {
-		return false;
-	}
 }
 
 function noDecimal() {
