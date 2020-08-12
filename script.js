@@ -1,4 +1,5 @@
 let operation = null;
+let operationClicked = false;
 let memory = null;
 let calculatedNum = null;
 let displayNum = '0';
@@ -47,7 +48,7 @@ function calculate() {
 			return (Number(calculatedNum) * Number(displayNum)).toString();
 		case 'divide':
 			if (displayNum === '0') {
-				return 'ERROR';
+				return 'DIV 0 ERROR';
 			}
 			return (Number(calculatedNum) / Number(displayNum)).toString();
 		default:
@@ -57,7 +58,9 @@ function calculate() {
 
 //Operation Keys
 document.getElementById('add').addEventListener('click', function(e) {
-	if (operation === null) {
+	if (operationClicked) {return};
+
+	if (calculatedNum === null) {
 		calculatedNum = displayNum;
 	} else {
 		calculatedNum = calculate();	
@@ -65,10 +68,13 @@ document.getElementById('add').addEventListener('click', function(e) {
 	displayNum = '0';
 	display(calculatedNum);
 	operation = 'add';
+	operationClicked = true;
 });
 
 document.getElementById('subtract').addEventListener('click', function(e) {
-	if (operation === null) {
+	if (operationClicked) {return};
+
+	if (calculatedNum === null) {
 		calculatedNum = displayNum;
 	} else {
 		calculatedNum = calculate();	
@@ -76,10 +82,13 @@ document.getElementById('subtract').addEventListener('click', function(e) {
 	displayNum = '0';
 	display(calculatedNum);
 	operation = 'subtract';
+	operationClicked = true;
 });
 
 document.getElementById('multiply').addEventListener('click', function(e) {
-	if (operation === null) {
+	if (operationClicked) {return};
+
+	if (calculatedNum === null) {
 		calculatedNum = displayNum;
 	} else {
 		calculatedNum = calculate();	
@@ -87,21 +96,27 @@ document.getElementById('multiply').addEventListener('click', function(e) {
 	displayNum = '0';
 	display(calculatedNum);
 	operation = 'multiply';
+	operationClicked = true;
 });
 
 document.getElementById('divide').addEventListener('click', function(e) {
-	if (operation === null) {
+	if (operationClicked) {return};
+
+	if (calculatedNum === null) {
 		calculatedNum = displayNum;
 	} else {
-		calculatedNum = calculate();		
+		calculatedNum = calculate();	
 	}
 	displayNum = '0';
 	display(calculatedNum);
 	operation = 'divide';
+	operationClicked = true;
 });
 
 document.getElementById('equals').addEventListener('click', function(e) {
-	if (operation === null) {
+	if (operationClicked) {return};
+
+	if (calculatedNum === null) {
 		calculatedNum = displayNum;
 	} else {
 		calculatedNum = calculate();			
@@ -110,65 +125,75 @@ document.getElementById('equals').addEventListener('click', function(e) {
 	display(calculatedNum);
 	operation = null;
 	calculatedNum = null;
-	displayNum = '0';
 });
 
 //Number Keys
 document.getElementById('zero').addEventListener('click', function(e) {
 	updateDisplayNum('0');
 	display(displayNum);
+	operationClicked = false;
 });
 
 document.getElementById('one').addEventListener('click', function(e) {
 	updateDisplayNum('1');	
-	display(displayNum);	
+	display(displayNum);
+	operationClicked = false;	
 });
 
 document.getElementById('two').addEventListener('click', function(e) {
 	updateDisplayNum('2');	
-	display(displayNum);		
+	display(displayNum);
+	operationClicked = false;		
 });
 
 document.getElementById('three').addEventListener('click', function(e) {
 	updateDisplayNum('3');
-	display(displayNum);		
+	display(displayNum);
+	operationClicked = false;		
 });
 
 document.getElementById('four').addEventListener('click', function(e) {
 	updateDisplayNum('4');	
-	display(displayNum);		
+	display(displayNum);
+	operationClicked = false;		
 });
 
 document.getElementById('five').addEventListener('click', function(e) {
 	updateDisplayNum('5');	
-	display(displayNum);		
+	display(displayNum);
+	operationClicked = false;		
 });
 
 document.getElementById('six').addEventListener('click', function(e) {
 	updateDisplayNum('6');	
-	display(displayNum);		
+	display(displayNum);
+	operationClicked = false;		
 });
 
 document.getElementById('seven').addEventListener('click', function(e) {
 	updateDisplayNum('7');
-	display(displayNum);		
+	display(displayNum);
+	operationClicked = false;		
 });
 
 document.getElementById('eight').addEventListener('click', function(e) {
 	updateDisplayNum('8');
-	display(displayNum);		
+	display(displayNum);
+	operationClicked = false;		
 });
 
 document.getElementById('nine').addEventListener('click', function(e) {
 	updateDisplayNum('9');		
-	display(displayNum);	
+	display(displayNum);
+	operationClicked = false;	
 });
 
 document.getElementById('decimal').addEventListener('click', function(e) {
 	if (noDecimal()) {
 		updateDisplayNum('.');
 	}	
-	display(displayNum);	
+	display(displayNum);
+	operationClicked = false;	
 });
 
 //Other Keys
@@ -177,14 +202,17 @@ document.getElementById('clear').addEventListener('click', function(e) {
 	calculatedNum = null;
 	displayNum = '0';
 	display(displayNum);
+	operationClicked = false;
 });
 
 document.getElementById('memory-save').addEventListener('click', function(e) {
 	memory = displayNum;
+	operationClicked = false;
 });
 
 document.getElementById('memory-clear').addEventListener('click', function(e) {
 	memory = null;
+	operationClicked = false;
 });
 
 document.getElementById('memory-recall').addEventListener('click', function(e) {
@@ -192,4 +220,5 @@ document.getElementById('memory-recall').addEventListener('click', function(e) {
 		displayNum = memory;
 		display(displayNum);
 	}
+	operationClicked = false;
 });
