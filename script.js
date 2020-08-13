@@ -5,14 +5,15 @@ let operationClicked = false;
 let displayNum = '0';
 
 function display(string) {
-	const tooLarge = (Number(string) > 999999999999.9);
-	const tooLong = (string.length > 14);
+	const tooLarge = (Number(string) > 99999999999.9);
+	const tooLong = (string.length > 13);
+	const display = document.getElementById('display-text');
 	if (tooLarge) {
-		document.getElementById('display').textContent = 'TOO LARGE';
+		display.textContent = 'TOO LARGE';
 	} else if (tooLong) {
-		document.getElementById('display').textContent = string.slice(0, 15);	
+		display.textContent = string.slice(0, 14);	
 	} else {
-		document.getElementById('display').textContent = string;	
+		display.textContent = string;	
 	}
 }
 
