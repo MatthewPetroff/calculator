@@ -1,7 +1,7 @@
 body {
 	margin: 0;
 	font-family: arial;
-	background-color: #C5CDBF;
+	background-color: white;
 }
 
 button {
@@ -9,47 +9,50 @@ button {
 	height: 100%;
 	color: white;
 	font-size: 30px;
+	border: none;
 	font-weight: bold;	
-}
-
-output {
-	display: flex;
-}
+}	
 
 .calculator {
 	width: 400px;
-	height: 650px;
 	margin: auto;
 	padding: 5px;
-	background-color: grey; 
+	background-color: white; 
 }
 
 .display {
-	width: 392px;
-	height: 100px;
+	width: 376px;
+	height: 92px;
 	margin: 4px;
-	background-color: #E9D9D1;
-	font-size: 50px;
-	font-weight: bold;
+	padding: 8px;
+	background-color: #58CCED;
+	color: #072F5F;
 }
 
 .row {
 	width: 392px;
 	height: 100px;
 	margin: 8px 4px;
-	background-color: none;
 	display: flex;
 	justify-content: space-between;
 }
 
+#display-text {
+	text-align: right;
+	color: #072F5F;
+	font-size: 50px;
+	font-weight: bold;
+	margin: auto;
+}
+
 .number {
-	background-color: #566585;
+	background-color: #1261A0;
 }
 
 .operation {
-	background-color: #132237;
+	background-color: #072F5F;
 }
 
 .regular {
-	background-color: #1B1C25;	
+	background-color: #3895D3;	
 }
