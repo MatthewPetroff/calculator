@@ -53,6 +53,14 @@ button {
 	background-color: #072F5F;
 }
 
+.decimal {
+	background-color: #1261A0;
+}
+
+.equals {
+	background-color: #072F5F;
+}
+
 .regular {
 	background-color: #3895D3;	
 }

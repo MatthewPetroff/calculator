@@ -34,15 +34,6 @@ function updateDisplayNum(char) {
 	operationClicked = false;
 }
 
-function noDecimal() {
-	for (let i = 0; i < displayNum.length; i++) {
-		if (displayNum[i] === '.') {
-			return false;
-		}
-	}
-	return true;
-}
-
 function calculate() {
 	switch (operation) {
 		case 'add':
@@ -73,20 +64,24 @@ function clickOperation(type) {
 }
 
 //Operation Keys
-document.getElementById('add').addEventListener('click', function(e) {
-	clickOperation('add');
-});
+document.querySelectorAll('.operation').forEach(operationBtn => {
+	operationBtn.addEventListener('click', (e) => {
+		clickOperation(e.target.value);
+	})
+})
 
-document.getElementById('subtract').addEventListener('click', function(e) {
-	clickOperation('subtract');
-});
+//Number Keys
+document.querySelectorAll('.number').forEach(numberBtn => {
+	numberBtn.addEventListener('click', (e) => {
+		updateDisplayNum(e.target.textContent);
+	})
+})
 
-document.getElementById('multiply').addEventListener('click', function(e) {
-	clickOperation('multiply');
-});
-
-document.getElementById('divide').addEventListener('click', function(e) {
-	clickOperation('divide');
+//Other Keys
+document.getElementById('decimal').addEventListener('click', function(e) {
+	if (!displayNum.includes('.')) {
+		updateDisplayNum('.');
+	}
 });
 
 document.getElementById('equals').addEventListener('click', function(e) {
@@ -100,54 +95,6 @@ document.getElementById('equals').addEventListener('click', function(e) {
 	calculatedNum = null;
 });
 
-//Number Keys
-document.getElementById('zero').addEventListener('click', function(e) {
-	updateDisplayNum('0');
-});
-
-document.getElementById('one').addEventListener('click', function(e) {
-	updateDisplayNum('1');		
-});
-
-document.getElementById('two').addEventListener('click', function(e) {
-	updateDisplayNum('2');			
-});
-
-document.getElementById('three').addEventListener('click', function(e) {
-	updateDisplayNum('3');	
-});
-
-document.getElementById('four').addEventListener('click', function(e) {
-	updateDisplayNum('4');		
-});
-
-document.getElementById('five').addEventListener('click', function(e) {
-	updateDisplayNum('5');			
-});
-
-document.getElementById('six').addEventListener('click', function(e) {
-	updateDisplayNum('6');			
-});
-
-document.getElementById('seven').addEventListener('click', function(e) {
-	updateDisplayNum('7');		
-});
-
-document.getElementById('eight').addEventListener('click', function(e) {
-	updateDisplayNum('8');	
-});
-
-document.getElementById('nine').addEventListener('click', function(e) {
-	updateDisplayNum('9');		
-});
-
-document.getElementById('decimal').addEventListener('click', function(e) {
-	if (noDecimal()) {
-		updateDisplayNum('.');
-	}
-});
-
-//Other Keys
 document.getElementById('clear').addEventListener('click', function(e) {
 	calculatedNum = null;
 	memory = null;
